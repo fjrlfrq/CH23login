@@ -1,9 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-/* GET home page. */
+
+module.exports = function(db){
+
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('login');
 });
 
-module.exports = router;
+router.get('/index', function(req, res, next) {
+  res.render('index');
+});
+
+return router;
+}

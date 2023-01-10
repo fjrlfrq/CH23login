@@ -3,8 +3,17 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const { Pool } = require('pg')
+ 
+const pool = new Pool({
+  user: 'fajar',
+  host: 'localhost',
+  database: 'posdb',
+  password: '12345',
+  port: 5432,
+})
 
-const indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index')(pool);
 
 const app = express();
 
