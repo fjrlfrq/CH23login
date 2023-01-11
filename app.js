@@ -3,6 +3,10 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const session = require('express-session')
+const flash = require('connect-flash');
+
+//connect pg
 const { Pool } = require('pg')
  
 const pool = new Pool({
@@ -26,6 +30,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'bootcamp',
+  resave: false,
+  saveUninitialized: true
+}))
+app.use(flash());
 
 app.use('/', indexRouter);
 
